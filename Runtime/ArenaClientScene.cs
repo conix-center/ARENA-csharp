@@ -550,9 +550,12 @@ namespace ArenaUnity
                 if (msg.persist.HasValue)
                     aobj.persist = (bool)msg.persist;
                 aobj.messageType = msg.type;
-                if (msg.ttl > 0)
+                if (msg.ttl != null)
                 {
-                    aobj.SetTtlDeleteTimer((float)msg.ttl);
+                    Debug.Log($"ttl: setting for {gobj.name }");
+                    if (!gobj.TryGetComponent<ArenaTtl>(out var ttl))
+                        ttl = gobj.AddComponent<ArenaTtl>();
+                    ttl.SetTtlDeleteTimer((float)msg.ttl);
                 }
 #if UNITY_EDITOR
                 // local create context auto-select
@@ -632,6 +635,7 @@ namespace ArenaUnity
         private void UpdateObjectMessage(ArenaObjectJson msg, object indata, ArenaObject aobj, GameObject gobj, JObject jData)
         {
             ArenaDataJson data = JsonConvert.DeserializeObject<ArenaDataJson>(indata.ToString());
+            Debug.Log($"parent: {data} {aobj} {indata}");
 
             // modify Unity attributes
             bool worldPositionStays = false; // default: most children need relative position

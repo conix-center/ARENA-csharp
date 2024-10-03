@@ -81,17 +81,17 @@ namespace ArenaUnity
         }
 
 
-        public void SetTtlDeleteTimer(float seconds)
-        {
-            StartCoroutine(TtlUpdater(seconds));
-        }
+        //public void SetTtlDeleteTimer(float seconds)
+        //{
+        //    StartCoroutine(TtlUpdater(seconds));
+        //}
 
-        IEnumerator TtlUpdater(float seconds)
-        {
-            yield return new WaitForSeconds(seconds);
-            externalDelete = true;
-            Destroy(gameObject);
-        }
+        //IEnumerator TtlUpdater(float seconds)
+        //{
+        //    yield return new WaitForSeconds(seconds);
+        //    externalDelete = true;
+        //    Destroy(gameObject);
+        //}
 
         IEnumerator PublishTickThrottle()
         {
